@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<style type="text/css">
+			*
+			{
+				border: 0px;
+				margin: 0px;
+				overflow: hidden;
+				padding: 0px;
+			}
+		</style>
+		<title>ConnectedDots.js 2.0.0</title>
+	</head>
+	<body>
+		<canvas id="connected-dots" data-color="38, 90, 136"></canvas>
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="node_modules/gsap/src/minified/TweenMax.min.js"></script>
+		<script src="dist/connected-dots.min.js"></script>
+		<script type="text/javascript">
+			$(function()
+			{
+				var connectedDots = new ConnectedDots("connected-dots");
+				
+				connectedDots.initialize();
+			});
+		</script>
+	</body>
+</html>

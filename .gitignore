@@ -1,0 +1,20 @@
+# Files created by OS
+#
+.DS_Store
+Desktop.ini
+
+# Files created by IDE
+#
+/.idea/
+
+# Logs & temporary files
+#
+/npm-debug.log
+
+# Downloadable & installable modules & components
+#
+/node_modules/
+
+# Not ignored
+#
+!.gitkeep

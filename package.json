@@ -1,0 +1,25 @@
+{
+	"name": "connected-dots",
+	"version": "2.0.0",
+	"description": "The Byloth's ConnectedDots effect as HTML5's canvas object.",
+	"keywords": [],
+	"author": "Bylothink",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:Byloth/connected-dots.git"
+	},
+	"license": "ISC",
+	"main": "index.html",
+	"dependencies": {
+		"gsap": "^1.19.0",
+		"jquery": "^2.2.4"
+	},
+	"devDependencies": {
+		"del": "^2.2.2",
+		"gulp": "^3.9.1",
+		"gulp-concat": "^2.6.0",
+		"gulp-sourcemaps": "^2.1.1",
+		"gulp-uglify": "^2.0.0"
+	},
+	"scripts": { }
+}
