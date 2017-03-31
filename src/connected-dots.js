@@ -1,21 +1,21 @@
 /*
- *				  ConnectedDots.JS v. 2.0
+ *                 ConnectedDots.JS v. 2.1
  * 
- *				 Written by Bilotta Matteo.
+ *                Written by Bilotta Matteo.
  * 
- * Copyright © 2015 - 2016, Bylothink. All rights reserved.
+ *  Copyright © 2015 - 2016, Bylothink. All rights reserved.
  */
 
 var Point = function(coordX, coordY)
 {
     // Private constants:
-        var SIZE = {
+        const SIZE = {
 
             MIN: 2,
             MAX: 2
         };
-        var WOBBING_RANGE = 100;
-        var ANIM_TIME = {
+        const WOBBING_RANGE = 100;
+        const ANIM_TIME = {
 
             MIN: 1,
             MAX: 2
@@ -29,8 +29,8 @@ var Point = function(coordX, coordY)
         this.originX = coordX;
         this.originY = coordY;
 
-        this.X = coordX;
-        this.Y = coordY;
+        this.x = coordX;
+        this.y = coordY;
 
         this.closest = [];
 
@@ -46,8 +46,8 @@ var Point = function(coordX, coordY)
 
             _animation = TweenMax.to(_this, duration, {
 
-                X: newCoordX,
-                Y: newCoordY,
+                x: newCoordX,
+                y: newCoordY,
 
                 ease: Back.easeInOut,
 
@@ -67,35 +67,44 @@ var Point = function(coordX, coordY)
 var ConnectedDots = function(selectorId)
 {
     // Private Constants:
-        var DRAW_RANGE = 175;
-        var EXIT_COORDS = {
+        const DRAW_RANGE = 175;
+        const EXIT_COORDS = {
 
             X: -1920,
             Y: -1080
         };
 
-        var MAX_LINKS = 5;
-        var MIN_LINKS = Math.floor(MAX_LINKS / 2);
+        const MAX_LINKS = 5;
+        const MIN_LINKS = Math.floor(MAX_LINKS / 2);
 
-        var SPACING = 75;
+        const SPACING = 75;
 
     // Private properties:
         var _this = this;
 
         var _domElement = document.getElementById(selectorId);
-        var _jqueryElement = $(_domElement);
+
+        var _size = {
+
+            width: 0,
+            height: 0
+        };
+        var _mouse = {
+            
+            x: EXIT_COORDS.X,
+            y: EXIT_COORDS.Y
+        };
 
         var _context;
-        var _mouse = EXIT_COORDS;
         var _points;
         var _spacing;
 
-        var _color = _jqueryElement.attr("data-color");
+        var _color = $(_domElement).data("color");
 
     // Private methods:
         var _getDistance = function(point1, point2)
         {
-            return Math.sqrt(Math.pow(point1.X - point2.X, 2) + Math.pow(point1.Y - point2.Y, 2));
+            return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
         };
 
         var _getMin = function(num1, num2, num3)
@@ -131,12 +140,12 @@ var ConnectedDots = function(selectorId)
     // Public methods:
         this.initialize = function()
         {
-            _domElement.height = $(window).height();
-            _domElement.width = $(window).width();
+            _domElement.width = _size.width;
+            _domElement.height = _size.height;
 
             _context = _domElement.getContext("2d");
 
-            /* Initializing points... */
+            // Initializing points...
                 _points = [];
 
                 for (var x = -1; (x * SPACING) < (_domElement.width + SPACING); x += 1)
@@ -154,7 +163,7 @@ var ConnectedDots = function(selectorId)
                     _points.push(row);
                 }
 
-            /* Connecting points... */
+            // Connecting points...
                 for (var x1 = 0; x1 < _points.length; x1 += 1)
                 {
                     for (var y1 = 0; y1 < _points[x1].length; y1 += 1)
@@ -201,12 +210,12 @@ var ConnectedDots = function(selectorId)
                     }
                 }
 
-            /* Initialization animations... */
-                for (var x = 0; x < _points.length; x += 1)
+            // Initialization animations...
+                for (var x1 = 0; x1 < _points.length; x1 += 1)
                 {
-                    for (var y = 0; y < _points[x].length; y += 1)
+                    for (var y1 = 0; y1 < _points[x1].length; y1 += 1)
                     {
-                        _points[x][y].startAnimation();
+                        _points[x1][y1].startAnimation();
                     }
                 }
         };
@@ -222,36 +231,36 @@ var ConnectedDots = function(selectorId)
 
         this.draw = function()
         {
-            for (var x = 0; x < _points.length; x += 1)
+            for (var x1 = 0; x1 < _points.length; x1 += 1)
             {
-                for (var y = 0; y < _points[x].length; y += 1)
+                for (var y1 = 0; y1 < _points[x1].length; y1 += 1)
                 {
-                    var pointDistance = _getDistance(_points[x][y], _mouse);
+                    var pointDistance = _getDistance(_points[x1][y1], _mouse);
 
                     if (pointDistance < DRAW_RANGE)
                     {
                         _context.beginPath();
-                        _context.arc(_points[x][y].X, _points[x][y].Y, _points[x][y].size, 0, 2 * Math.PI, false);
+                        _context.arc(_points[x1][y1].x, _points[x1][y1].y, _points[x1][y1].size, 0, 2 * Math.PI, false);
                         _context.fillStyle = "rgba(" + _color + ", " + (1 - (pointDistance / DRAW_RANGE)) + ")";
                         _context.fill();
                         _context.closePath();
                     }
 
-                    for (var i = 0; i < _points[x][y].closest.length; i += 1)
+                    for (var i = 0; i < _points[x1][y1].closest.length; i += 1)
                     {
-                        var startingDistance = _getDistance(_points[x][y], _mouse);
-                        var endingDistance = _getDistance(_points[x][y].closest[i], _mouse);
+                        var startingDistance = _getDistance(_points[x1][y1], _mouse);
+                        var endingDistance = _getDistance(_points[x1][y1].closest[i], _mouse);
 
                         if ((startingDistance < DRAW_RANGE) || (endingDistance < DRAW_RANGE))
                         {
-                            var gradient = _context.createLinearGradient(_points[x][y].X, _points[x][y].Y, _points[x][y].closest[i].X, _points[x][y].closest[i].Y);
+                            var gradient = _context.createLinearGradient(_points[x1][y1].x, _points[x1][y1].y, _points[x1][y1].closest[i].x, _points[x1][y1].closest[i].y);
 
                             gradient.addColorStop(0, "rgba(" + _color + ", " + (1 - (startingDistance / DRAW_RANGE)) + ")");
                             gradient.addColorStop(1, "rgba(" + _color + ", " + (1 - (endingDistance / DRAW_RANGE)) + ")");
 
                             _context.beginPath();
-                            _context.moveTo(_points[x][y].X, _points[x][y].Y);
-                            _context.lineTo(_points[x][y].closest[i].X, _points[x][y].closest[i].Y);
+                            _context.moveTo(_points[x1][y1].x, _points[x1][y1].y);
+                            _context.lineTo(_points[x1][y1].closest[i].x, _points[x1][y1].closest[i].y);
                             _context.strokeStyle = gradient;
                             _context.stroke();
                             _context.closePath();
@@ -268,28 +277,42 @@ var ConnectedDots = function(selectorId)
         // Mouse events:
             $(window).mousemove(function(event)
             {
-                _mouse = {
-
-                    X: event.clientX,
-                    Y: event.clientY // + $(document).scrollTop()
-                };
+                _mouse.x = event.clientX;
+                _mouse.y = event.clientY; // + $(document).scrollTop();
             });
 
             $(window).mouseout(function(event)
             {
-                _mouse = EXIT_COORDS;
+                _mouse = {
+                    
+                    x: EXIT_COORDS.X,
+                    y: EXIT_COORDS.Y
+                };
             });
 
-    $(window).resize(function()
-    {
-        for (var x = 0; x < _points.length; x += 1)
+        $(window).resize(function()
         {
-            for (var y = 0; y < _points[x].length; y += 1)
-            {
-                _points[x][y].killAnimation();
-            }
-        }
+            var newWidth = $(window).width();
+            var newHeight = $(window).height();
 
-        _this.initialize();
-    });
+            // TODO: Modificare questa logica introducendo una sorta di tolleranza?
+            //
+                if ((_size.width != newWidth) || (_size.height != newHeight))
+                {
+                    _size.width = newWidth;
+                    _size.height = newHeight;
+
+                    // TODO: Evitare di eliminare e reinizializzare, ogni volta, TUTTI i ConnectedDots?
+                    //
+                        for (var x1 = 0; x1 < _points.length; x1 += 1)
+                        {
+                            for (var y1 = 0; y1 < _points[x1].length; y1 += 1)
+                            {
+                                _points[x1][y1].killAnimation();
+                            }
+                        }
+
+                        _this.initialize();
+                }
+        });
 };
