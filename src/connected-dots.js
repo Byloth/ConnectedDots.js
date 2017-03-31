@@ -86,8 +86,8 @@ var ConnectedDots = function(selectorId)
 
         var _size = {
 
-            width: 0,
-            height: 0
+            width: $(window).width(),
+            height: $(window).height()
         };
         var _mouse = {
             
