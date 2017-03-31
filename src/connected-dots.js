@@ -1,5 +1,5 @@
 /*
- *                 ConnectedDots.JS v. 2.1
+ *                ConnectedDots.JS v. 2.1.0
  * 
  *                Written by Bilotta Matteo.
  * 
