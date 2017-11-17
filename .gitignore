@@ -11,6 +11,10 @@ Desktop.ini
 #
 /npm-debug.log
 
+# Generated & compiled files
+#
+/build/
+
 # Downloadable & installable modules & components
 #
 /node_modules/

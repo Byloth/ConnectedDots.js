@@ -12,19 +12,18 @@
 				padding: 0px;
 			}
 		</style>
-		<title>ConnectedDots.js 2.1.0</title>
+		<title>ConnectedDots.js 2.2.0</title>
 	</head>
 	<body>
 		<canvas id="connected-dots" data-color="38, 90, 136"></canvas>
 		<script src="node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="node_modules/gsap/src/minified/TweenMax.min.js"></script>
+		<script src="node_modules/byloth-jbyloth/dist/byloth-jbyloth.min.js"></script>
 		<script src="dist/connected-dots.min.js"></script>
 		<script type="text/javascript">
-			$(function()
+			jQuery(function()
 			{
-				var connectedDots = new ConnectedDots("connected-dots");
-				
-				connectedDots.initialize();
+				let connectedDots = $("#connected-dots").connectedDots();
 			});
 		</script>
 	</body>
