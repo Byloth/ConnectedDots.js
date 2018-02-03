@@ -1,32 +1,26 @@
 {
-	"name": "connected-dots",
-	"version": "2.2.0",
+	"name": "byloth-connected-dots",
+	"version": "2.2.1",
 	"description": "The Byloth's ConnectedDots effect as HTML5's canvas object.",
 	"keywords": [],
 	"author": "Bylothink",
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com:Byloth/connected-dots.git"
+		"url": "git+ssh://git@github.com:Byloth/ConnectedDots.js.git"
 	},
-	"license": "Unlicense",
-	"private": true,
+	"license": "MIT",
 	"main": "index.html",
 	"dependencies": {
-		"byloth-jbyloth": "^1.0.2",
+		"byloth-jbyloth": "^1.0.3",
 		"gsap": "^1.20.3",
-		"jquery": "^2.2.4"
+		"jquery": "^3.3.1"
 	},
 	"devDependencies": {
-		"babel-preset-env": "^1.6.1",
-		"grunt": "^1.0.1",
-		"grunt-babel": "^6.0.0",
-		"grunt-contrib-clean": "^1.1.0",
-		"grunt-contrib-concat": "^1.0.1",
-		"grunt-contrib-jshint": "^1.1.0",
-		"grunt-contrib-qunit": "^2.0.0",
-		"grunt-contrib-uglify": "^3.0.1",
-		"grunt-contrib-watch": "^1.0.0",
-		"load-grunt-tasks": "^3.5.2"
+		"ajv": "^5.5.2",
+		"uglifyjs-webpack-plugin": "^1.1.8",
+		"webpack": "^3.10.0"
 	},
-	"scripts": {}
+	"scripts": {
+		"build": "webpack --config webpack.config.js"
+	}
 }
